@@ -5,7 +5,7 @@
   - [OS](#os)
 
 ## JavaScript
-[모던 자바스크립트 Deep Dive](https://github.com/seonghun0828/TIL/blob/34dbf00945774c6cb31f58964414084733f273dc/JavaScript/ModernJsDeepDive)
+[모던 자바스크립트 Deep Dive](https://github.com/seonghun0828/TIL/tree/main/JavaScript/ModernJsDeepDive)
 ## CS
 
 ### Network
