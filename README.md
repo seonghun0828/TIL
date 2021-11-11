@@ -23,6 +23,6 @@
 - 프로젝트하며 발생한 http와 https 이슈를 어떻게 해결했나?   
 - 프로젝트하며 local storage를 썼다고 했는데 왜 local storage를 사용했나?    
 - 웹 서비스가 느릴 때 최적화 할 수 있는 방법은?   
-- 쿠키와 세션의 차이   
+- [쿠키와 세션의 차이](https://github.com/seonghun0828/TIL/blob/main/network/%EB%A9%B4%EC%A0%91%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%20%EA%B3%B5%EB%B6%80/%EC%BF%A0%ED%82%A4%EC%99%80%20%EC%84%B8%EC%85%98.md)   
 - ECMA 5와 ECMA 6의 차이   
 - (위 질문 대답을 고민하니 질문을 바꿔) IE같이 ES6가 안되는 브라우저에서는 어떻게 할 것인가?   
