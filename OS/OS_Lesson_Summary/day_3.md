@@ -78,5 +78,48 @@ Process : P1, P2, P3 / Burst Time(msec) : 24, 3, 3
    
 Convoy Effect (호위 효과) : 앞에 큰게 하나 있으면 뒤의 프로세스들은 아무것도 못하고 오래 기다려야 함.   
 FCFS는 Non-preemptive scheduling   
+   
+## 2.4 Shortest Job First (SJF) Scheduling
+: 가장 짧은 시간이 걸리는 프로세스부터 처리   
+- Probably optimal. 증명된 최적의 방법. but Not realistic. prediction may be needed.   
+- Preemptive와 Non-preemptive 둘 다 가능   
+- Preemptive : 프로세스들이 각기 도착한 시간이 다르면 도착한 시간에 가장 시간이 덜 걸리는 프로세스를 실행. 끝날때까지.   
+- Non-preemptive : 먼저 도착한걸 먼저 실행하더라도 이후에 도착한 것이 시간이 덜 걸린다면 즉시 바꿈.   
+
+## 2.5 Priority Scheduling
+* 우선 순위 : 보통 정수이고 낮을수록 우선 순위가 높음.   
+- 우선 순위에 따라 프로세스를 스케쥴링   
+- Priority를 정하는 기준에는 Internal과 External이 있음.   
+- Internal : time limit, memory requirement, I/O to CPU burst(I/O 길고 CPU 짧은 것 우선)   
+- External : amount of funds being paid, political factors ...   
+- Preemptive와 Non-preemptive 둘다 가능   
+- 문제 : Indefinite blocking : starvation(기아) : 너무 우선순위가 낮은 프로세스는 계속 들어오는 것에 밀려 실행X   
+- 해결책 : aging : 오래 기다릴수록 우선순위를 올려준다.   
+   
+## 2.6 Round Robin (RR) Scheduling
+: Time-sharing system (시분할/시공유 시스템)에서 사용   
+- Time quantum 시간 양자 = time slice (10 ~ 100 msec)   
+- Preemptive scheduling : 시간이 지나면 자동으로 넘어간다.   
+- Performance depends on the size of the time quantum(∆: 람다).   
+- ∆ -> 무한대이면 RR은 FCFS와 동일해진다.   
+- ∆ -> 0이면 모든 프로세스가 동시에 실행되는 것으로 느껴진다. 그러나 overhead가 높아진다.   
+- AWT가 아닌 ATT(Average Turnaround Time: 평균 반환 시간)으로 계산. 각 프로세스의 반환 시간을 평균함.   
+
+## 2.7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
