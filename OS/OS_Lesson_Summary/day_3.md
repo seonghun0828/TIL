@@ -105,21 +105,61 @@ FCFS는 Non-preemptive scheduling
 - ∆ -> 0이면 모든 프로세스가 동시에 실행되는 것으로 느껴진다. 그러나 overhead가 높아진다.   
 - AWT가 아닌 ATT(Average Turnaround Time: 평균 반환 시간)으로 계산. 각 프로세스의 반환 시간을 평균함.   
 
-## 2.7
+## 2.7 Multilevel Queue Scheduling
+Process group : 프로세스들의 성격에 따라 그룹이 나뉨.   
+- System processes : OS system   
+- Interactive processes : 사용자와 대화. ex) 게임하며 키보드, 마우스 입출력   
+- Interactive editing processes : ex) 워드 타이핑   
+- Batch processes : 꾸러미로 묶어 일괄 처리. interactive 하지 않음.   
+- Student processes   
+   
+Single Ready Queue : Several sperate queues   
+- 각각의 queue에 절대적 우선순위 존재   
+- 또는 CPU time을 각 queue에 차등 배분   
+- 각 queue는 독립된 scheduling 정책   
+   
+2.8 Multilevel Feedback Queue Scheduling
+: 복수 개의 queue가 있고 다른 queue로 점진적으로 이동함.   
+- 모든 프로세스는 하나의 입구로 진입   
+- 너무 많은 CPU time 사용 시 다른 queue로 이동   
+- 기아 상태 우려 시 우선순위 높은 queue로 이동   
 
+2.9 프로세스 생성과 종료
+프로세스는 프로세스에 의해 만들어진다. 부팅 시 init 프로세스 생성에서 시작됨.   
+- 부모 프로세스, 자식 프로세스, Sibling 프로세스 등으로 프로세스 트리를 이룸   
+   
+Process Identifier (PID)   
+- 보통 정수로 되어 있음. PPID(parent PID)도 존재.   
+   
+프로세스 생성(creation)   
+- fork() system call : 부모 프로세스 복사   
+- exec() : 실행파일을 메모리로 가져오기   
+   
+프로세스 종료(termination)   
+- exit() system call   
+- 해당 프로세스가 가졌던 모든 자원(메모리, 파일, I/O 등)은 OS에게 반환   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 2.10 쓰레드(Thread)
+: 프로그램 내부의 흐름, 맥.   
+다중 쓰레드 (Multithreads) : 현대의 거의 대부분의 프로그램   
+- 한 프로그램에 2개 이상의 맥이 있음.   
+- 맥이 빠른 시간 간격으로 스위칭되면 여러 맥이 **동시에** 실행되는 것처럼 보인다.   
+- 동시에 라는 말은 영어로 concurrent vs simultaneous 두 개의 뜻이 있음.
+- concurrent : 스위칭이 빨라 동시성을 가지는 것처럼 보임 / simultaneous : 진짜 두개가 동시에 실행됨.   
+- 보통은 CPU가 하나이므로 concurrent한 동시성을 말함.   
+   
+ex) Web browser : 화면 출력하는 쓰레드 + 데이터 읽어오는 쓰레드   
+ex) Word processor : 호면 출력하는 쓰레드 + 키보드 입력 받는 쓰레드 + 철자 오류 확인 쓰레드   
+ex) 음악 연주기, 동영상 플레이어, IDE 등...   
+   
+단일 쓰레드 (single thread) 프로그램 : 한 프로세스에는 기본 1개의 쓰레드   
+다중 쓰레드 (multi-threads) 프로그램 : 한 프로세스에 여러 개의 쓰레드    
+   
+쓰레드의 구조
+- 프로세스의 메모리 공간(code, data) 공유   
+- 프로세스의 자원 공유 (file, i/o...)   
+- 개별적인 PC(program counter), SP(stack pointer), registers, stack 등은 공유하지 않음.   
+- 프로세스도 스위칭이 있고 쓰레드에도 있지만, context switching 되는 단위는 thread   
+   
+* 하나의 프로그램은 code + data + stack으로 구성 (code, data 공유, stack 비공유)   
+* 함수 호출 시 각 쓰레드의 return address나 parameter를 stack에 저장. -> 공유하지 않음.   
