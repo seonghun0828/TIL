@@ -1,73 +1,3 @@
-## 3.4 생산자-소비자 문제
-전통적 동기화 문제 (Classical Synchronization Problem)   
-(1) Producer and Consumer : 유한 버퍼 문제   
-(2) Readers-Writers Problem : 공유 데이터베이스 접근   
-(3) Dining Philosopher Problem : 식사하는 철학자 문제   
-   
-(1) 생산자-소비자 문제   
-- 생산자가 데이터를 생산하면 소비자는 그것을 소비   
-- ex) 컴파일러 -> 어셈블러 / 웹 서버 -> 웹 클라이언트   
-   
-유한 버퍼 (bounded buffer)   
-- 생산된 데이터는 버퍼에 일단 저장 (생산자와 소비자의 속도 차이 등의 이유로)   
-- 현실 세계에서 버퍼 크기는 유한   
-- 생산자는 버퍼가 가득 차면 더 넣을 수 없다.   
-- 소비자는 버퍼가 비어 있으면 뺄 수 없다.   
-   
-최종적으로 버퍼 내에는 0개의 항목이 있어야 하는데 잘못된 결과(실행 불가 or count != 0)가 나오는 이유   
-- 공통 변수 count, buf[] 에 대한 동시 업데이트   
-- 공통 변수 업데이트 구간(임계구역, critical section)에 대한 동시 진입   
-   
-해결법   
-- 임계 구역에 대한 동시 접근 방지 (상호 배타)   
-- 세마포를 이용한 상호 배타 (mutual exclusion)   
-- 세마포 : mutex.value = 1 (# of permit)   
-```java
-mutex = new Semaphore(1);
-void insert(int item) {
-  /* check if buf is full */
-  while (count == size)
-      ;
-  /* buf is not full */
-  mutex.acquire();
-  buf[in] = item;
-  in = (in+1) % size;
-  count++;
-  mutex.release();
-}
-int remove() {
-  /* check if buf is empty */
-  while (count == 0)
-      ;
-  /* buf is not empty */
-  mutex.acquire();
-  int item = buf[out];
-  out = (out+1) % size;
-  count--;
-  mutex.release();
-  return item;
-}
-```
-Busy-wait   
-- 위의 코드는 조건이 만족할 때까지 while 무한 루프를 돌기 때문에 CPU 낭비가 심함   
-- 무한 루프 대신 semaphore를 사용해 프로세스를 감옥에 가둬(block) 효율을 높일 수 있음.
-- 생산자 : 버퍼가 가득 차면 기다려야 = 빈(empty) 공간이 있어야   
-- 소비자 : 버퍼가 비면 기다려야 = 찬(full) 공간이 있어야   
-   
-세마포를 사용한 busy-wait 회피   
-- 생산자 : empty.acquire() // # of permit = BUF_SIZE   
-- 소비자 : full.acquire() // # of permit = 0   
-   
-[생산자]   
-empty.acquire(); -> 생산자가 하나 생산하면 buf 하나 생김   
-PRODUCE;   
-full.release(); -> 소비자 wake up   
-   
-[소비자]   
-full.acquire(); -> 소비자가 하나 소비하면 buf 하나 빔   
-CONSUME;   
-empty.release(); -> 생산자 wake up   
-   
 ## 3.5 읽기-쓰기 문제
 Readers-Writers Problem   
 공통 데이터 베이스   
@@ -168,3 +98,35 @@ Handling deadlock
 - 교착 상태는 실제로 잘 일어나지 않는다.   
 - 4가지 필요조건 만족해도 항상 일어나는 것도 아니다.   
 - 교착 상태 발생 시 재시동 (PC 등은 가능한 방법)   
+
+## 3.9 모니터
+: 세마포 이후의 프로세스 동기화 도구이며 어셈블리 언어 수준인 세마포보다 고수준(high level)의 개념이다.   
+- 공유 자원 + 공유 자원 접근 함수   
+- 2개의 queues : 배타 동기 + 접근 동기   
+- 공유 자원 접근 함수에는 최대 1개의 쓰레드만 진입   
+- 진입 쓰레드가 조건 동기로 블록되면 새 쓰레드 진입 가능   
+- 새 쓰레드는 조건 동기로 블록된 쓰레드를 깨울 수 있다.   
+- 깨워진 쓰레드는 현재 쓰레드가 나가면 재진입할 수 있다.   
+   
+<img width='500px' src='https://user-images.githubusercontent.com/31424628/147449667-3fb94f9e-fbc3-4f1d-9e09-9aa234186211.png' />
+자바의 모든 객체는 모니터가 될 수 있다.   
+- 배타 동기 : sychronized 키워드 사용해 지정   
+- 조건 동기 : wait(), notify(), notifyAll() 메소드 사용   
+   
+```java
+class C {
+   int value, ...;   
+   synchronized void f() { // 공통 변수 업데이트 하는 함수, 하나의 쓰레드만 실행 가능
+   ...
+   }
+   synchronized void g() { // 공통 변수 업데이트 하는 함수, 하나의 쓰레드만 실행 가능
+   ...
+   }
+   void h() { // 공통 변수 업데이트 하지 않음, 다른 것과 관계 없이 실행 가능
+   ...
+   }
+}
+```
+모니터는 세마포어를 사용하는 모든 코드와 교체 가능하다.
+
+
