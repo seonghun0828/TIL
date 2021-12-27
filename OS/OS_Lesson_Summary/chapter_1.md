@@ -1,3 +1,4 @@
+# 1. 서론
 ## 1.1 운영체제의 정의
 Operating System - Windows 10, Linux, MacOs, iOS...   
 운영체제가 없는 컴퓨터는 야생마와 같다. 야생마를 길들여 타기 위해서는 운영체제가 필요하다.   
