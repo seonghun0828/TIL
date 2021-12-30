@@ -44,8 +44,8 @@ Virtual Memory
 - 실제 페이지 부재 확률은 매우 낮다.   
    
 다른 방법   
-HDD는 접근 시간이 너무 길다. swap device로는 부적합   
-SSD(flash memory) 또는 느린 저가의 DRAM을 사용한다.   
+- HDD는 접근 시간이 너무 길다. swap device로는 부적합   
+- SSD(flash memory) 또는 느린 저가의 DRAM을 사용한다.   
    
 ## 5.2 페이지 교체 (Page replacement)   
 - 요구되어지는 페이지만 backing store에서 가져온다.   
@@ -105,7 +105,35 @@ CPU utilization vs Degree of multiprogramming
 정적 할당 (static allocation)   
 - 균등 할당 (Equal allocation) : 총 프레임 / 프로세스 개수. 사이즈가 다른 경우 비효율적이다.   
 - 비례 할당 (Proportinal allocation) : 비율에 따라 다르게 할당한다.   
-
+   
+동적 할당 (dynamic allocation)   
+   
+(1) Working set model   
+: 어느 시점에 어느 정도 메모리가 필요한 지는 과거를 돌아봐야 알 수 있음. 과거를 통해 미래 예측   
+- 어느 시간대에 주로 사용되는 페이지 = working set   
+- working set window : 정해진 시간대. 이 시간에 몇 개의 프레임을 나눠줄 것인가?   
+- Working set 크기 만큼의 프레임 할당   
+   
+(2) Page Fault Frequency (PFF)   
+- Page fault 발생 비율의 상한/하한선   
+- 상한선 초과 프로세스에 더 많은 프레임 할당   
+- 하한선 이하 프로세스의 프레임은 회수   
+   
+## 5.4 페이지 크기(size)
+- 일반적 크기 : 4KB ~ 4MB   
+- 점차 커지는 경향   
+   
+페이지 크기에 영향을 끼치는 척도들   
+- 내부 단편화 : page size 작을수록 내부 단편화 줄어든다.   
+- Page-in, Page-out : 입출력 시간이 클수록 page size는 큰게 좋다. (한번에 많이 가져오기)   
+- 페이지 테이블 크기 : 같은 메모리에서 page size가 크면 페이지 테이블 줄어든다.   
+- Memory resolution(해상도) : 진짜 필요한 내용만 메모리에 적재. page size 작은 게 더 정밀하다.   
+- Page fault 발생 확률 : Page fault가 적게 일어나려면 page size는 큰 게 좋다.   
+    
+페이지 테이블   
+- 원래는 별도의 chip (TLB 캐시:Translation Look-aside Buffer)   
+- 기술 발달에 따라 캐시 메모리는 on-chip 형태로 (CPU 내부로)   
+- TLB 역시 on-chip 내장
 
 
 
