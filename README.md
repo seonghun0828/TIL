@@ -18,7 +18,8 @@
 ### OS
 [운영체제 수업 정리 (양희재 교수님)](https://github.com/seonghun0828/TIL/tree/main/OS/OS_Lesson_Summary)
 ## Project
-[SSAFY_공통_팜앤팜스](https://github.com/seonghun0828/TIL/tree/main/Project/SSAFY_%EA%B3%B5%ED%86%B5_%ED%8C%9C%EC%95%A4%ED%8C%9C%EC%8A%A4)
+[SSAFY_공통_팜앤팜스](https://github.com/seonghun0828/TIL/tree/main/Project/SSAFY_%EA%B3%B5%ED%86%B5_%ED%8C%9C%EC%95%A4%ED%8C%9C%EC%8A%A4)   
+[SSAFY_특화_전우치](https://github.com/seonghun0828/TIL/tree/main/Project/SSAFY_%ED%8A%B9%ED%99%94_%EC%A0%84%EC%9A%B0%EC%B9%98)
 ## 면접 질문
 ### 인성
 - 자기 소개   
