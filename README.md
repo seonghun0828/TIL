@@ -9,7 +9,8 @@
 ## JavaScript
 [모던 자바스크립트 Deep Dive](https://github.com/seonghun0828/TIL/tree/main/JavaScript/ModernJsDeepDive)   
 [Web Fundamentals (Google developers)](https://developers.google.com/web/fundamentals)   
-[Javascript Info](https://ko.javascript.info/)
+[Javascript Info](https://ko.javascript.info/)   
+[알게된 중요한 것들](https://github.com/seonghun0828/TIL/tree/main/JavaScript/ETC)
 ## CS
 
 ### Network
